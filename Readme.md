@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Ирина Чернышева](https://up.htmlacademy.ru/javascript/24/user/1796361).
-* Наставник: `Неизвестно`.
+* Наставник: [Дина Абрамова](https://htmlacademy.ru/profile/id1483099).git add  .
 
 ---
 
