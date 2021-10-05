@@ -1,7 +1,7 @@
 import { getRandomPositiveFloat } from './utils/get-random-positive-float.js';
 import { getRandomPositiveInteger } from './utils/get-random-positive-integer.js';
 
-// const OFFERS_COUNT = 10;чтобы пропустил eslint
+const OFFERS_COUNT = 10;
 const TITLES = [
   'Квартира',
   'Дом',
@@ -32,8 +32,8 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-const counter = (initial) => () => initial++;
-const avatarCounter = counter(1);
+const createCounter = (initial) => () => initial++;
+const avatarCounter = createCounter(1);
 
 const getAvatar = () => {
   const count = avatarCounter();
@@ -41,8 +41,13 @@ const getAvatar = () => {
 };
 
 const createNotice = () => {
-  const lat = getRandomPositiveFloat(35.65000, 35.70000, 5);
-  const lng = getRandomPositiveFloat(139.70000, 139.80000, 5);
+  const LONGITUDE_START = 139.70000;
+  const LONGITUDE_END = 139.80000;
+  const ROUNDING = 5;
+  const LATITUDE_START = 35.65000;
+  const LATITUDE_END = 35.70000;
+  const lat = getRandomPositiveFloat(LATITUDE_START, LATITUDE_END, ROUNDING);
+  const lng = getRandomPositiveFloat(LONGITUDE_START, LONGITUDE_END, ROUNDING);
 
   return {
     author: {
@@ -68,5 +73,5 @@ const createNotice = () => {
   };
 };
 
-// const similarNotice = Array.from({length: OFFERS_COUNT}, createNotice);чтобы пропустил eslint
+new Array(OFFERS_COUNT).fill(null).map(() => createNotice());
 createNotice();
