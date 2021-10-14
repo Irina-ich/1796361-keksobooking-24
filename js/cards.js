@@ -23,7 +23,7 @@ const createImages = (container, sources) => {
 const createFeatures = (features, container) => {
   const list = container.querySelectorAll('li');
   list.forEach((item) => {
-    if (features.indexOf(item.classList[1].replace('popup__feature--', '')) === -1) {
+    if (features.some((feature) => item.classList.contains('popup__feature--' + feature))) {
       item.remove();
     }
   });
@@ -58,7 +58,7 @@ const createCard = (object) => {
   }
   const capacity = offerCard.querySelector('.popup__text--capacity');
   if (offer.rooms && offer.guests) {
-    capacity.textContent = `${offer.rooms} для ${offer.guests}`;
+    capacity.textContent = `${offer.rooms} комнат для ${offer.guests} гостей` ;
   } else {
     capacity.remove();
   }
