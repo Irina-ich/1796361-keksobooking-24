@@ -23,7 +23,7 @@ const createImages = (container, sources) => {
 const createFeatures = (features, container) => {
   const list = container.querySelectorAll('li');
   list.forEach((item) => {
-    if (features.some((feature) => item.classList.contains('popup__feature--' + feature))) {
+    if (features.some((feature) => item.classList.contains(`popup__feature--${feature}`))) {
       item.remove();
     }
   });

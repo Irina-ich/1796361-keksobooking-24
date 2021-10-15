@@ -9,3 +9,4 @@ const container = document.querySelector('#map-canvas');
 offers.forEach((offer) => {
   container.appendChild(createCard(offer));
 });
+
