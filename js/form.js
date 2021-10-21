@@ -19,9 +19,9 @@ const fieldsetAdForm = adForm.querySelectorAll('fieldset');
 const mapFeatures = mapFilters.querySelector('.map__features');
 
 const titleInput = document.querySelector('#title');
-const priceInput = document.querySelector('price');
-
+const priceInput = document.querySelector('#price');
 const type = adForm.querySelector('#type');
+
 const roomNumber = adForm.querySelector('#room_number');
 const capacity = adForm.querySelector('#capacity');
 
@@ -60,11 +60,11 @@ type.addEventListener('change', () => {
 });
 
 roomNumber.addEventListener('change', () => {
-  if (roomNumber.value === '100' && capacity.value !== '0') {
+  if (roomNumber.value === 100 && capacity.value !== 0) {
     roomNumber.setCustomValidity('Не для гостей');
   } else if (roomNumber.value < capacity.value) {
     roomNumber.setCustomValidity('Гостей больше, чем комнат');
-  } else if (roomNumber.value === '100' && capacity.value === '0') {
+  } else if (roomNumber.value === 100 && capacity.value === 0) {
     roomNumber.setCustomValidity('');
   } else if (roomNumber.value === capacity.value) {
     roomNumber.setCustomValidity('');
