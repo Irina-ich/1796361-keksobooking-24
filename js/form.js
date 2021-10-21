@@ -11,13 +11,22 @@ const TYPE_MIN_PRICE = {
   palace: 10000,
 };
 
+
 const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
+const mapFiltersElement = mapFilters.querySelectorAll('.map__filter');
+const fieldsetAdForm = adForm.querySelectorAll('fieldset');
+const mapFeatures = mapFilters.querySelector('.map__features');
+
 const titleInput = document.querySelector('#title');
 const priceInput = document.querySelector('price');
+
 const type = adForm.querySelector('#type');
 const roomNumber = adForm.querySelector('#room_number');
 const capacity = adForm.querySelector('#capacity');
+
+const timeIn = document.querySelector('#timein');
+const timeOut = document.querySelector('#timeout');
 
 titleInput.addEventListener('input', () => {
   const valueLength = titleInput.value.length;
@@ -64,12 +73,45 @@ roomNumber.addEventListener('change', () => {
   }
 });
 
-const inactivePage = () => {
+
+timeIn.addEventListener('change', () => {
+  timeOut.value = timeIn.value;
+});
+timeOut.addEventListener('change', () => {
+  timeIn.value = timeOut.value;
+});
+
+
+const getInactivePage = () => {
   adForm.classList.add('ad-form--disabled');
-  mapFilters.classList.add('map__filters--disabled');
+  fieldsetAdForm.forEach((Item) => {
+    Item.setAttribute('disabled', true);
+  });
+
+  mapFilters.classList.add('ad-form--disabled');
+  mapFiltersElement.forEach((Item) => {
+    Item.setAttribute('disabled', true);
+  });
+
+  mapFeatures.classList.add('ad-form--disabled');
+  mapFeatures.setAttribute('disabled', true);
 };
 
-const activePage = () => {
+const getActivePage = () => {
   adForm.classList.remove('ad-form--disabled');
-  mapFilters.classList.remove('map__filters--disabled');
+  fieldsetAdForm.forEach((Item) => {
+    Item.removeAttribute('disabled');
+  });
+
+  mapFilters.classList.remove('ad-form--disabled');
+  mapFiltersElement.forEach((Item) => {
+    Item.removeAttribute('disabled');
+  });
+
+  mapFeatures.classList.remove('ad-form--disabled');
+  mapFeatures.removeAttribute('disabled');
 };
+
+getInactivePage();
+getActivePage();
+
