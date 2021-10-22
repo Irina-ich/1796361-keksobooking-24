@@ -1,3 +1,4 @@
+
 import {getRandomPositiveFloat,getRandomPositiveInteger} from './utils/randomNumbers.js';
 import {TITLES, TYPES, CHECKINS, CHECKOUTS, FEATURES, DESCRIPTIONS, PHOTOS, LONGITUDE_START, LONGITUDE_END, ROUNDING, LATITUDE_START, LATITUDE_END} from './consts.js';
 
