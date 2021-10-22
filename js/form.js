@@ -31,47 +31,74 @@ const timeOut = document.querySelector('#timeout');
 titleInput.addEventListener('input', () => {
   const valueLength = titleInput.value.length;
 
+  if(valueLength > MIN_TITLE_LENGTH && valueLength < MAX_TITLE_LENGTH) {
+    titleInput.setCustomValidity('');
+  }
   if (valueLength < MIN_TITLE_LENGTH) {
     titleInput.setCustomValidity(`Ещё ${MIN_TITLE_LENGTH - valueLength}симв.`);
-  } else if (valueLength > MAX_TITLE_LENGTH) {
-    titleInput.setCustomValidity(`Удалите лишние ${valueLength -MAX_TITLE_LENGTH} симв.`);
-  } else {
-    titleInput.setCustomValidity('');
+  }
+  if (valueLength > MAX_TITLE_LENGTH) {
+    titleInput.setCustomValidity(`Удалите лишние ${valueLength - MAX_TITLE_LENGTH} симв.`);
   }
   titleInput.reportValidity();
 });
 
+
 priceInput.addEventListener('input', () => {
   const valueLength = priceInput.value.length;
 
+  if(valueLength > MIN_PRICE_LENGTH && valueLength < MAX_PRICE_LENGTH) {
+    priceInput.setCustomValidity('');
+  }
   if (valueLength < MIN_PRICE_LENGTH) {
     priceInput.setCustomValidity(`Ещё ${MIN_PRICE_LENGTH - valueLength}симв.`);
-  } else if (valueLength > MAX_PRICE_LENGTH) {
+  }
+  if (valueLength > MAX_PRICE_LENGTH) {
     priceInput.setCustomValidity(`Удалите лишние ${valueLength - MAX_PRICE_LENGTH} симв.`);
-  } else {
-    priceInput.setCustomValidity('');
   }
   priceInput.reportValidity();
 });
+
 
 type.addEventListener('change', () => {
   priceInput.placeholder = TYPE_MIN_PRICE[type.value];
   priceInput.min = TYPE_MIN_PRICE[type.value];
 });
 
-roomNumber.addEventListener('change', () => {
-  if (roomNumber.value === 100 && capacity.value !== 0) {
-    roomNumber.setCustomValidity('Не для гостей');
-  } else if (roomNumber.value < capacity.value) {
-    roomNumber.setCustomValidity('Гостей больше, чем комнат');
-  } else if (roomNumber.value === 100 && capacity.value === 0) {
-    roomNumber.setCustomValidity('');
-  } else if (roomNumber.value === capacity.value) {
-    roomNumber.setCustomValidity('');
-  } else if (roomNumber.value > capacity.value) {
-    roomNumber.setCustomValidity('');
-  }
-});
+
+const Guest = {
+  ONE: '1',
+  TWO: '2',
+  THREE: '3',
+  NULL: '0',
+};
+
+const Room = {
+  ONE: '1',
+  TWO: '2',
+  THREE: '3',
+  HUNDRED: '100',
+};
+
+const capacityRom = {
+  [Room.ONE]: [Guest.ONE],
+  [Room.TWO]: [Guest.ONE, Guest.TWO],
+  [Room.THREE]: [Guest.ONE, Guest.TWO, Guest.THREE],
+  [Room.HUNDRED]: [Guest.NULL],
+};
+
+const validateCapacityRoom = () => {
+  const countRoomsSelected = roomNumber.value;
+  const guestCountSelected = capacity.value;
+  const isAvailabel = capacityRom[countRoomsSelected].includes(guestCountSelected);
+
+  isAvailabel ? capacity.setCustomValidity('') : capacity.setCustomValidity('Гостей больше, чем комнат');
+
+  capacity.reportValidity();
+};
+
+capacity.addEventListener('change', validateCapacityRoom);
+roomNumber.addEventListener('change', validateCapacityRoom);
 
 
 timeIn.addEventListener('change', () => {
@@ -112,6 +139,4 @@ const getActivePage = () => {
   mapFeatures.removeAttribute('disabled');
 };
 
-getInactivePage();
-getActivePage();
-
+export {getInactivePage, getActivePage};
