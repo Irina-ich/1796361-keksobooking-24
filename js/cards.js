@@ -95,4 +95,4 @@ const createCard = (object) => {
   return offerCard;
 };
 
-export {createCard};
+export {createCard, TypeHouse, createFeatures, createImages};

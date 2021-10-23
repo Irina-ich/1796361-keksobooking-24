@@ -50,6 +50,4 @@ function getRandomPositiveInteger (a, b) {
   return Math.floor(result);
 }
 
-
-
 export {getRandomPositiveFloat, getRandomPositiveInteger};

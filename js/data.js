@@ -1,6 +1,5 @@
-
 import {getRandomPositiveFloat,getRandomPositiveInteger} from './utils/randomNumbers.js';
-import {TITLES, TYPES, CHECKINS, CHECKOUTS, FEATURES, DESCRIPTIONS, PHOTOS, LONGITUDE_START, LONGITUDE_END, ROUNDING, LATITUDE_START, LATITUDE_END} from './consts.js';
+import {OFFERS_COUNT, TITLES, TYPES, CHECKINS, CHECKOUTS, FEATURES, DESCRIPTIONS, PHOTOS, LONGITUDE_START, LONGITUDE_END, ROUNDING, LATITUDE_START, LATITUDE_END} from './consts.js';
 
 const createCounter = (initial) => () => initial++;
 const avatarCounter = createCounter(1);
@@ -38,4 +37,6 @@ const createNotice = () => {
   };
 };
 
-export {createNotice};
+const points = new Array(OFFERS_COUNT).fill(null).map(() => createNotice());  //[{},{}]
+
+export {points};
